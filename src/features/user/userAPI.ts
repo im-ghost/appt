@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 
 const fetchUsers = async ()=>{
     
-    const authToken = localStorage.getItem("quiz-app-user")
+    const authToken = localStorage.getItem("appt-app-user")
     const authTokenP = JSON.parse(authToken)
    const users = await fetch(`${BASE_URL}/users`,{
         headers:{
@@ -17,7 +17,7 @@ const fetchUsers = async ()=>{
 
 const delUser = async (id)=>{
     
-    const authToken = localStorage.getItem("quiz-app-user")
+    const authToken = localStorage.getItem("appt-app-user")
     const authTokenP = JSON.parse(authToken)
    const user = await fetch(`${BASE_URL}/users/user/${id}`,{
         headers:{
@@ -53,7 +53,7 @@ const registerUser = async (payload)=>{
 }
 
 const updateUser = async ({id,user})=>{
-    const authToken = localStorage.getItem("quiz-app-user")
+    const authToken = localStorage.getItem("appt-app-user")
     const authTokenP = JSON.parse(authToken)
    const userr = await fetch(`${BASE_URL}/users/user/${id}`,{
         headers:{
@@ -70,7 +70,7 @@ const updateUser = async ({id,user})=>{
 
 const fetchUser = async (id)=>{
     
-    const authToken = localStorage.getItem("quiz-app-user")
+    const authToken = localStorage.getItem("appt-app-user")
     const authTokenP = JSON.parse(authToken)
    const users = await fetch(`${BASE_URL}/users/user/${id}`,{
         headers:{
