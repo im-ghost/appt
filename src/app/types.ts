@@ -6,4 +6,4 @@ type Appointment= {
   
 }
 type Appointments = [Appointment]
-type USERS = USER[]
+export type USERS = USER[]
