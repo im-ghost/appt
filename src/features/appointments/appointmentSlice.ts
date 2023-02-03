@@ -1,25 +1,77 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {
+  createAsyncThunk,
+  createSlice,
+  PayloadAction
+ } from '@reduxjs/toolkit';
+import {
+  RootState,
+  AppThunk 
+} from '../../app/store';
+import {
+  fetchAppointment,
+  fetchUserAppointment,
+  fetchDoctorAppointment,
+  fetchAppointments
+} from "./appointmentsApi"
 
-const initialState = {
-  value: 0,
+export const fetchAppointmentAsync = createAsyncThunk(
+  'appointment/fetchAppointment',
+  async (id: any) => {
+    const response = await fetchAppointment(id);
+    // The value we return becomes the `fulfilled` action payload
+    return response.data;
+  }
+);
+export const fetchAppointmentsAsync = createAsyncThunk(
+  'appointment/fetchAppointments',
+  async () => {
+    const response = await fetchAppointment();
+    // The value we return becomes the `fulfilled` action payload
+    return response.data;
+  }
+);
+export const fetchDoctorAppointmentAsync = createAsyncThunk(
+  'appointment/fetchDoctorAppointment',
+  async (id: any) => {
+    const response = await fetchDoctorAppointment(id);
+    // The value we return becomes the `fulfilled` action payload
+    return response.data;
+  }
+);
+export const fetchUserAppointmentAsync = createAsyncThunk(
+  'appointment/fetchUserAppointment',
+  async (id: any) => {
+    const response = await fetchUserAppointment(id);
+    // The value we return becomes the `fulfilled` action payload
+    return response.data;
+  }
+);
+
+export interface AppointmentState {
+  value: object;
+  status: 'idle' | 'loading' | 'failed';
 }
 
-export const quizSlice = createSlice({
-  name: 'quiz',
+const initialState:AppointmentState = {
+  value: {},
+  status: 'idle'
+}
+
+export const appointmentSlice = createSlice({
+  name: 'Appointment',
   initialState,
-  reducers: {
-    increment: (state) => {
-      state.value += 1
-    },
-    decrement: (state) => {
-      state.value -= 1
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload
-    },
+  reducers: { },
+  extraReducers: (builder) => {
+    /*builder
+      .addCase(incrementAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.value += action.payload;
+      })*/
   },
 })
 
-export const { increment, decrement, incrementByAmount } = quizSlice.actions
+export const {  } = appointmentSlice.actions
 
-export default quizSlice.reducer
+export const selectAppointment = (state: RootState) => state.appointment.value;
+
+export default appointmentSlice.reducer
