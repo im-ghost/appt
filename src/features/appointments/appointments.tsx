@@ -1,15 +1,15 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from './quizSlice'
+import { useAppSelector, useAppDispatch } from '../../app/hooks'
+import {  selectAppointment } from './appointmentSlice'
 
-export function Quiz() {
-  const count = useSelector((state) => state.quiz.value)
-  const dispatch = useDispatch()
+export function Appointment() {
+  const appointment = selectAppointment
+  const dispatch = useAppDispatch()
 
   return (
     <div>
       <div>
-        <button
+        {/*<button
           aria-label="Increment value"
           onClick={() => dispatch(increment())}
         >
@@ -21,7 +21,7 @@ export function Quiz() {
           onClick={() => dispatch(decrement())}
         >
           Decrement
-        </button>
+        </button>/*/}
       </div>
     </div>
   )
