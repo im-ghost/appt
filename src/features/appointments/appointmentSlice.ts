@@ -1,11 +1,11 @@
 import {
   createAsyncThunk,
   createSlice,
-  PayloadAction
+  /*PayloadAction*/
  } from '@reduxjs/toolkit';
 import {
   RootState,
-  AppThunk 
+  /*AppThunk */
 } from '../../app/store';
 import {
   fetchAppointment,
@@ -25,7 +25,7 @@ export const fetchAppointmentAsync = createAsyncThunk(
 export const fetchAppointmentsAsync = createAsyncThunk(
   'appointment/fetchAppointments',
   async () => {
-    const response = await fetchAppointment();
+    const response = await fetchAppointments();
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
@@ -70,7 +70,7 @@ export const appointmentSlice = createSlice({
   },
 })
 
-export const {  } = appointmentSlice.actions
+/*export const {  } = appointmentSlice.actions*/
 
 export const selectAppointment = (state: RootState) => state.appointment.value;
 
