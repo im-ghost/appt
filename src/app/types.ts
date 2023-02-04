@@ -1,9 +1,9 @@
-type USER = {
+export type USER = any /* {
   name:String,
   
-}
-type Appointment= {
+}*/
+export type APPOINTMENT = any /* {
   
-}
-type Appointments = [Appointment]
+}*/
+export type APPOINTMENTS = [APPOINTMENT]
 export type USERS = USER[]
