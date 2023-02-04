@@ -1,87 +1,62 @@
 import {
-  USERS
-} from "../../app/types"
+  //USERS,
+  USER,
+  APPOINTMENT
+} from "../../app/types";
+import { api } from "../../app/hooks"
+//import { useSelector } from "react-redux"
 const BASE_URL = "http://localhost:5000/api";
-import { useSelector } from "react-redux"
-type AUTHTOKEN = string
-type AUTHTOKENP = object
+type AUTHTOKEN = string | null
+type AUTHTOKENP = USER | null
 
 const fetchAppointments = async ()=>{
     
+    
+}
+
+const delAppointment = async (id:any)=>{
+    
     const authToken:AUTHTOKEN = localStorage.getItem("appt-app-user")
-    const authTokenP:AUTHTOKENP = JSON.parse(authToken)
-   const users :USERS = await fetch(`${BASE_URL}/users`,{
-        headers:{
-            authorization:authTokenP.token
-        }
-    })
-    console.log(users)
-    return users
+    if(typeof(authToken) === "string"){
+   // const authTokenP:AUTHTOKENP = JSON.parse(authToken)
+      await api.delete<null>(`${BASE_URL}/users/user/${id}`,id)
+    return {
+      status:200,
+      message:"Appointment deleted"
+    }
+    }
+    else{
+      throw new Error("not authorized ")
+    }
 }
 
-const delAppointment = async (id)=>{
+const fetchDoctorAppointment = async (id:any)=>{
+  
+  
+}
+
+const fetchUserAppointment = async (id:any)=>{
+}
+
+const updateAppointment = async ({id, appointment}:{id:string, appointment: APPOINTMENT})=>{
+    const authToken:AUTHTOKEN = localStorage.getItem("appt-app-user")
+    if(typeof(authToken) === "string"){
+   // const authTokenP:AUTHTOKENP = JSON.parse(authToken)
+}
+    else{
+      throw new Error("not authorized ")
+    }
+}
+
+const fetchAppointment = async (id:any)=>{
     
-    const authToken = localStorage.getItem("appt-app-user")
-    const authTokenP = JSON.parse(authToken)
-   const user = await fetch(`${BASE_URL}/users/user/${id}`,{
-        headers:{
-            authorization:authTokenP.token
-        },
-        method:"DELETE"
-    })
-    return user
+    const authToken:AUTHTOKEN = localStorage.getItem("appt-app-user")
+    if(typeof(authToken) === "string"){
+ // const authTokenP :AUTHTOKENP= JSON.parse(authToken)
 }
-
-const fetchDoctorAppointment = async (id)=>{
-
-   const userr = await fetch(`${BASE_URL}/users/user/login`,{
-        method:"POST",
-        headers:{
-        'Content-Type':'application/json' 
-             },
-        body:JSON.stringify(user)
-    })
-    return userr
-}
-
-const fetchUserAppointment = async (id)=>{
-    console.log(payload)
-   const userr = await fetch(`${BASE_URL}/users/`,{
-        method:"POST",
-        headers:{
-        'Content-Type':'application/json' 
-             },
-        body:JSON.stringify(payload)
-    })
-    return userr
-}
-
-const updateAppointment = async ({id, appointment})=>{
-    const authToken = localStorage.getItem("appt-app-user")
-    const authTokenP = JSON.parse(authToken)
-   const userr = await fetch(`${BASE_URL}/users/user/${id}`,{
-        headers:{
-            authorization:authTokenP.token,
-        'Content-Type':'application/json' 
-             },
-
-        method:"PUT",
-        body:JSON.stringify(user)
-    })
-
-    return userr
-}
-
-const fetchAppointmen = async (id)=>{
-    
-    const authToken = localStorage.getItem("appt-app-user")
-    const authTokenP = JSON.parse(authToken)
-   const users = await fetch(`${BASE_URL}/users/user/${id}`,{
-        headers:{
-            authorization:authTokenP.token
-        }
-    })
-    return users
+    else{
+      throw new Error("not authorized ")
+    }
 }
 
 
