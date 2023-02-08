@@ -8,14 +8,25 @@ async function request<TResponse>(
   return await response.json();
 }
  export const api = {
-  get: <TResponse>(url: string) => 
-  	request<TResponse>(url),
-  post: <TBody extends BodyInit, TResponse>(url: string, body: TBody) => 
-  	request<TResponse>(url, { method: 'POST', body }),
-   put: <TBody extends BodyInit, TResponse>(url: string, body: TBody) => 
-  	request<TResponse>(url, { method: 'PUT', body }),
-  delete: <TResponse>(url: string, id: string) => 
-  	request<TResponse>(url, { method: 'DELETE', body:id }),
+  get: <TResponse>(url: string,token: string) => 
+  	request<TResponse>(url,{
+  	  headers:{
+  	    authorization:token
+  	  }
+  	}),
+  post: <TBody extends BodyInit, TResponse>(url: string, body: TBody, token:string) => 
+  	request<TResponse>(url, { method: 'POST',   headers:{
+  	    authorization:token
+  	  },body }),
+   put: <TBody extends BodyInit, TResponse>(url: string, body: TBody,token:string) => 
+  	request<TResponse>(url, { method: 'PUT', body,  headers:{
+  	    authorization:token
+  	  } }),
+  delete: <TResponse>(url: string, 
+    id:string,token:string) => 
+  	request<TResponse>(url, { method: 'DELETE',  headers:{
+  	    authorization:token
+  	  }, body:id }),
 }
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
